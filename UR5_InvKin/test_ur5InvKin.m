@@ -3,8 +3,16 @@ rosshutdown;
 ur5 = ur5_interface();
 joint_offset = [-pi/2 -pi/2 0 -pi/2 0 0]';
 joints = [0 0 0 0 0 0]';
+ur5.move_joints(joints, 5);
+pause(6);
 g_S_T = ur5FwdKin(joints);
-g_S_T(1,4) = g_S_T(2,4)+0.1;
+
+% tf_frame('base_link', 'starting', g_S_T);
+% pause(0.5);
+% g_S_T(1,4) = g_S_T(2,4)+0.1;
+% tf_frame('base_link', 'desired', g_S_T);
+% pause(0.5);
+
 g_baseK_S = [ROTZ(-pi/2) [0 0 0.0892]'; 0 0 0 1];  %transformation from keating base to {S}
 %-90 degree rotation around z and up x 0.0892 
 tf_frame('base_link','S',g_baseK_S)
@@ -13,6 +21,12 @@ baseKFrame = tf_frame('S','base_K',eye(4));
 pause(0.5)
 baseKFrame.move_frame('S',inv(g_baseK_S));
 pause(0.5)
+
+tf_frame('S', 'starting', g_S_T);
+pause(0.5);
+g_S_T(1,4) = g_S_T(2,4)+0.1;
+tf_frame('S', 'desired', g_S_T);
+pause(0.5);
 
 g_T_toolK = [ROTX(-pi/2)*ROTY(pi/2) [0 0 0]'; 0 0 0 1]; %transformation from {T} to keating tool 
 %-90 around x and 90 around y

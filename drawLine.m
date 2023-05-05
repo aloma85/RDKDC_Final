@@ -15,14 +15,14 @@ function drawLine(g1, g2, mode, speed, ur5, thetastart)
     p1 = g1(1:3, 4);
     % from g2, get p2
     p2 = g2(1:3, 4);
-
+    
     % compute total distance traveled
     sfinal = norm(p2 - p1); % end position (1D)
     theta = thetastart;
     tstart = tic;
     t = tic;
     T = norm(p2-p1) / speed;
-    dt = 0.5;
+    dt = 0.1;
     while (toc(tstart) < T)
         tnext = toc(t);
         if (tnext >= dt)
@@ -39,9 +39,9 @@ function drawLine(g1, g2, mode, speed, ur5, thetastart)
 %                 disp(dists(i));
             end
             [~, idx] = min(dists);
-            disp(thetanew(:, idx) - theta);
-            disp(thetanew);
-            disp(theta);
+%             disp(thetanew(:, idx) - theta);
+%             disp(thetanew);
+%             disp(theta);
             theta = thetanew(:, idx);
             ur5.move_joints(theta, dt);
             t = tic;
