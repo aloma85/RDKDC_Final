@@ -18,6 +18,8 @@ function [ theta ] = ur5InvKin( gd )
     g_baseK_S = [ROTZ(-pi/2) [0 0 0.0892]'; 0 0 0 1];
     g_T_toolK = [ROTX(-pi/2)*ROTY(pi/2) [0 0 0]'; 0 0 0 1];
     gd = g_baseK_S*gd*g_T_toolK;
+%     tf_frame('baseK', '6', gd); %%%%%%
+%     pause(0.5); %%%%%
     theta = zeros(6, 8);
     % DH parameters
     d1 = 0.0892;
@@ -41,6 +43,8 @@ function [ theta ] = ur5InvKin( gd )
     
     % Calculating theta1
     p05 = gd * [0, 0, -d6, 1]'  - [0, 0, 0, 1]';
+%     tf_frame('baseK', '5', [gd(1:3, 1:3), p05(1:3); 0 0 0 1]); %%%%
+%     pause(0.5); %%%%%
     psi = atan2(p05(2), p05(1));
     phi = acos(d4 / sqrt(p05(2)*p05(2) + p05(1)*p05(1)));
     theta(1, 1:4) = pi/2 + psi + phi;

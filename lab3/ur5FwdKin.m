@@ -11,7 +11,7 @@ function [gst,Twist] = ur5FwdKin(q)
 %     w = [ez, ey, ey, ey, -ez, ey];
     ex = [1; 0; 0];
     ez = [0; 0; 1];
-    w = [ez, -ex, -ex, -ex, -ez, -ex];
+    w = [ez, ex, ex, ex, -ez, ex];
 
     % q
 %     q_coords = [0, 0, 0;
@@ -22,17 +22,17 @@ function [gst,Twist] = ur5FwdKin(q)
 %                 l(2) + l(3), l(4) + l(6), l(1) - l(5)].';
     q_coords = [0, 0, 0;
                 0, 0, 0;
-                0, l(1), 0;
-                0, l(1)+l(2), 0;
-                -l(3), l(1)+l(2), 0;
-                0, l(1)+l(2), -l(4)].';
+                0, -l(1), 0;
+                0, -l(1)-l(2), 0;
+                l(3), -l(1)-l(2), 0;
+                0, -l(1)-l(2), -l(4)].';
 
     % Calculate twists
     Twist = [cross(q_coords, w); w];
    
     % Calculate gst0
 %     gst0 = [ROTX(-pi/2)*ROTZ(pi), q_coords(:, 6); 0 0 0 1];
-    gst0 = [ROTY(pi), [-l(3)-l(5); l(1)+l(2); -l(4)]; 0 0 0 1];
+    gst0 = [ROTX(pi), [l(3)+l(5); -l(1)-l(2); -l(4)]; 0 0 0 1];
 
 
      % skew3

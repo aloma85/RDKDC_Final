@@ -63,15 +63,19 @@ g1 = ur5.get_current_transformation("base_link", "tool0");
 ur5.move_joints(ur5.home(), 10);
 pause(11);
 % g1 = [eye(3), [0.5; 0.2; 0]; zeros(1, 3), 1];
-% g1 = ur5.get_current_transformation("base_link", "tool0");
-% theta1 = ur5InvKin(g1)
-g1approx = ur5FwdKin(theta1(:, 1))
+% g1 = ur5.get_current_transformation("baseK", "tool0");
+theta1 = ur5InvKin(g1)
+% g1approx = ur5FwdKin(theta1(:, 1))
 ur5.move_joints(theta1(:, 1), 10);
 pause(11);
 theta1(:, 1)
 qnow = ur5.get_current_joints()
-gnow = ur5.get_current_transformation("base_link", "tool0")
-gnow-g1approx
-g1approx - g1
+gnow = ur5.get_current_transformation("S", "T")
+g1-gnow
+qnow-theta(:, 1)
 % v = 0.05; % m/s
 % drawLine(g1, g2, 0, v, ur5, theta1);
+%%
+q = ur5.get_current_joints()
+gnow = ur5FwdKin(q);
+q_approx = ur5InvKin(gnow)
