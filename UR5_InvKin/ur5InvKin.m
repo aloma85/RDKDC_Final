@@ -18,8 +18,8 @@ function [ theta ] = ur5InvKin( gd )
     g_baseK_S = [ROTZ(-pi/2) [0 0 0.0892]'; 0 0 0 1];
     g_T_toolK = [ROTX(-pi/2)*ROTY(pi/2) [0 0 0]'; 0 0 0 1];
     gd = g_baseK_S*gd*g_T_toolK;
-%     tf_frame('baseK', '6', gd); %%%%%%
-%     pause(0.5); %%%%%
+    tf_frame('baseK', '6', gd); %%%%%%
+    pause(0.5); %%%%%
     theta = zeros(6, 8);
     % DH parameters
     d1 = 0.0892;
@@ -120,6 +120,9 @@ function [ theta ] = ur5InvKin( gd )
         theta(1,j) = theta(1,j)-pi;
     end
     
+    theta(1, :) = theta(1, :) + pi;
+    theta(2, :) = theta(2, :) - pi/2;
+    theta(4, :) = theta(4, :) - pi/2;
     % Bound the joint angles from -pi to pi
     for i=1:6
         for j=1:8

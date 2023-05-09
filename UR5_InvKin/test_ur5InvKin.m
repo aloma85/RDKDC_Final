@@ -17,6 +17,7 @@ pause(0.5);
 tf_frame('baseK', 'S', g_baseK_S);
 pause(0.5);
 tf_frame('tool0', 'T', inv(g_T_toolK));
+pause(0.5);
 
 tf_frame('S', 'starting', g_S_T);
 pause(0.5);
@@ -24,7 +25,9 @@ pause(0.5);
 % temp = g_S_T(2, 4);
 % g_S_T(2, 4) = g_S_T(1, 4);
 % g_S_T(1, 4) = temp;
-g_S_T = [ROTZ(pi/2), [0; 0; 0]; 0, 0, 0, 1]*g_S_T;
+g_S_T(1, 4) = g_S_T(1, 4) + 0.2;
+g_S_T(2, 4) = g_S_T(2, 4) + 0.4;
+% g_S_T = [ROTZ(pi/2), [0; 0; 0]; 0, 0, 0, 1]*g_S_T;
 tf_frame('S', 'desired', g_S_T);
 pause(0.5);
 % %%
@@ -52,13 +55,25 @@ pause(0.5);
 % tf_frame('tool0','T',inv(g_T_toolK));
 % pause(0.5)
 
-toolKFrame = tf_frame('T','tool_K',eye(4));
-pause(0.5)
-toolKFrame.move_frame('T',g_T_toolK);
-pause(0.5)
+% toolKFrame = tf_frame('T','tool_K',eye(4));
+% pause(0.5)
+% toolKFrame.move_frame('T',g_T_toolK);
+% pause(0.5)
 g_des = g_baseK_S*g_S_T*g_T_toolK; %transformation from keating base to keating tool 
 tf_frame('baseK','T2',g_des);
 pause(0.5)
 
 thetas = ur5InvKin(g_S_T);
+thetas(1, :) = thetas(1, :) + pi;
+thetas(2, :) = thetas(2, :) - pi/2;
+thetas(4, :) = thetas(4, :) - pi/2;
+for i=1:6
+    for j=1:8
+        if thetas(i,j) <= -pi
+            thetas(i,j) = thetas(i,j) + 2*pi;
+        elseif thetas(i,j) > pi
+            thetas(i,j) = thetas(i,j) - 2*pi;
+        end
+    end
+end
 ur5.move_joints(thetas(:,1),3)
