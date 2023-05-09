@@ -63,17 +63,17 @@ g_des = g_baseK_S*g_S_T*g_T_toolK; %transformation from keating base to keating 
 tf_frame('baseK','T2',g_des);
 pause(0.5)
 
-thetas = ur5InvKin(g_S_T);
-thetas(1, :) = thetas(1, :) + pi;
-thetas(2, :) = thetas(2, :) - pi/2;
-thetas(4, :) = thetas(4, :) - pi/2;
-for i=1:6
-    for j=1:8
-        if thetas(i,j) <= -pi
-            thetas(i,j) = thetas(i,j) + 2*pi;
-        elseif thetas(i,j) > pi
-            thetas(i,j) = thetas(i,j) - 2*pi;
-        end
-    end
-end
-ur5.move_joints(thetas(:,1),3)
+% thetas = ur5InvKin(g_S_T);
+% thetas(1, :) = thetas(1, :) + pi;
+% thetas(2, :) = thetas(2, :) - pi/2;
+% thetas(4, :) = thetas(4, :) - pi/2;
+% for i=1:6
+%     for j=1:8
+%         if thetas(i,j) <= -pi
+%             thetas(i,j) = thetas(i,j) + 2*pi;
+%         elseif thetas(i,j) > pi
+%             thetas(i,j) = thetas(i,j) - 2*pi;
+%         end
+%     end
+% end
+% ur5.move_joints(thetas(:,1),3)

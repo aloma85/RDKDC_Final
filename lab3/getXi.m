@@ -1,11 +1,12 @@
 function xi = getXi(g)
+%     disp('this Xi!')
     R = g(1:3, 1:3);
     p = g(1:3, 4);
     trR = trace(R);
     th = acos((trR - 1) / 2);
     xi = zeros(6, 1);
     
-    if th == 0
+    if abs(th) < 1e-3
         w = [0; 0; 0];
         v = p / sqrt(p' * p);
     else
