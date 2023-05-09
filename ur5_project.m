@@ -14,7 +14,7 @@ disp('Setting up UR5 and necessary frames ...');
 ur5 = ur5_interface();
 ur5.move_joints(ur5.home(), 5);
 pause(6);
-
+%% For user-inputted gstart, gend
 g_baseK_S = [ROTZ(-pi/2) [0 0 0.0892]'; 0 0 0 1];  %transformation from keating base to {S}
 g_T_toolK = [ROTX(-pi/2)*ROTY(pi/2) [0 0 0]'; 0 0 0 1]; % tool k is inline with tool 0
 g_baselink_baseK = [ROTZ(pi), [0; 0; 0]; 0, 0, 0, 1];
@@ -42,6 +42,11 @@ input("Move UR5 to ending position and press enter.");
 gend = ur5.get_current_transformation('S', 'T');
 input("Move UR5 to starting position and press enter.");
 gstart = ur5.get_current_transformation('S', 'T');
+%% For Custom gstart, gend
+gstart = [0, 0, -1, 0.3; 0, -1, 0, -0.4; -1, 0, 0, 0.22; 0, 0, 0, 1];
+gend = [0, 0, -1, -0.3; 0, -1, 0, 0.39; -1, 0, 0, 0.22; 0, 0, 0, 1];
+qs = ur5InvKin(gstart);
+ur5.move_joints(qs(:, 1), 5);
 %%
 if mode == 0 || mode == 1
     g1 = gstart;
@@ -63,13 +68,25 @@ if mode == 0 || mode == 1
     pause(0.5);
 
     v = 0.05;
-    drawLine(gstart, g1, mode, v, ur5, ur5.get_current_joints());
+    safety = drawLine(gstart, g1, mode, v, ur5, ur5.get_current_joints());
+    if (safety == 0)
+        return;
+    end
     disp('here');
-    drawLine(g1, g2, mode, v, ur5, ur5.get_current_joints());
-    drawLine(g2, gend, mode, v, ur5, ur5.get_current_joints());
+    safety = drawLine(g1, g2, mode, v, ur5, ur5.get_current_joints());
+    if (safety == 0)
+        return;
+    end
+    safety = drawLine(g2, gend, mode, v, ur5, ur5.get_current_joints());
+    if (safety == 0)
+        return;
+    end
 else
-    v = 0.01;
+    v = 0.1;
     gend = [gstart(1:3, 1:3), [gend(1:2, 4); gstart(3, 4)]; 0 0 0 1];
-    drawLine(gstart, gend, mode, v, ur5, ur5.get_current_joints());
+    safety = drawLine(gstart, gend, mode, v, ur5, ur5.get_current_joints());
+    if (safety == 0)
+        return;
+    end
 end
 
