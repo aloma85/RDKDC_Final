@@ -1,4 +1,4 @@
-function TJ = ur5TJcontrol(g_d, K, ur5)
+function TJ = trans_jacobian(g_d, K, ur5)
     % ur5TJcontrol: Control UR5 to achieve the desired end-effector pose
     % using the transpose Jacobian method.
     % Input:
@@ -7,7 +7,7 @@ function TJ = ur5TJcontrol(g_d, K, ur5)
     %   ur5: UR5 robot object
 
     % Initialize variables
-    T = 0.4;
+    T = 0.3;
     q = ur5.get_current_joints();
     g = ur5FwdKin(q);
     xi = getXi(g_d \ g);
@@ -50,7 +50,7 @@ function TJ = ur5TJcontrol(g_d, K, ur5)
 
         % Check manipulability
         if abs(manipulability(J, 'sigmamin')) < 0.0001
-            finalerr = -1;
+            final_err = -1;
             return;
         end
 
