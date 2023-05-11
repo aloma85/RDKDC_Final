@@ -1,0 +1,228 @@
+Positions:
+
+gstart = [0, 0, -1, 0.3; 
+          0, -1, 0, 0; 
+          -1, 0, 0, 0.22; 
+          0, 0, 0, 1];
+gend = [0, 0, -1, 0.4; 
+        0, -1, 0, 0.3; 
+        -1, 0, 0, 0.22; 
+        0, 0, 0, 1];
+
+Inv Kin
+___________
+
+Rerr_start =
+
+   1.4337e-05
+
+
+perr_start =
+
+   3.7917e-04
+
+
+Rerr_end =
+
+   3.5142e-05
+
+
+perr_end =
+
+   4.7807e-04
+
+Inverse Jac
+____________
+
+Rerr_start =
+
+   1.4337e-05
+
+
+perr_start =
+
+   3.7917e-04
+
+
+Rerr_end =
+
+   2.3832e-04
+
+
+perr_end =
+
+    0.0070
+
+Jac Transpose
+___________
+
+Rerr_start =
+
+   1.4337e-05
+
+
+perr_start =
+
+   3.7917e-04
+
+
+Rerr_end =
+
+    0.0070
+
+
+perr_end =
+
+    0.0084
+
+Positions:
+
+gstart = [0, 0, -1, -0.5; 
+          0, -1, 0, 0.4; 
+          -1, 0, 0, 0.1; 
+          0, 0, 0, 1];
+gend = [0, 0, -1, -0.3; 
+        0, -1, 0, 0.2; 
+        -1, 0, 0, 0.1; 
+        0, 0, 0, 1];
+
+Inv Kin
+_________
+
+
+Rerr_start =
+
+   5.1210e-05
+
+
+perr_start =
+
+   3.9050e-04
+
+
+Rerr_end =
+
+   2.4269e-05
+
+
+perr_end =
+
+    0.0037
+
+Inv Jac
+_______
+Rerr_start =
+
+   5.1210e-05
+
+
+perr_start =
+
+   3.9050e-04
+
+
+Rerr_end =
+
+   2.1200e-04
+
+
+perr_end =
+
+    0.0102
+
+Trans Jac
+________
+
+Rerr_start =
+
+   5.1210e-05
+
+
+perr_start =
+
+   3.9050e-04
+
+
+Rerr_end =
+
+    0.0022
+
+
+perr_end =
+
+    0.0099
+
+
+Positions:
+
+gstart = [0, 0, -1, 0.1; 
+          0, -1, 0, -0.3; 
+          -1, 0, 0, 0.05; 
+          0, 0, 0, 1];
+gend = [0, 0, -1, 0.2; 
+        0, -1, 0, -0.15; 
+        -1, 0, 0, 0.05; 
+        0, 0, 0, 1];
+
+Inv Kin
+_______
+Rerr_start =
+
+   2.1796e-05
+
+
+perr_start =
+
+   3.1608e-04
+
+
+Rerr_end =
+
+   1.5152e-05
+
+
+perr_end =
+
+   4.8655e-04
+
+Inv Jac
+_______
+Rerr_start =
+
+   2.1796e-05
+
+
+perr_start =
+
+   3.1608e-04
+
+
+Rerr_end =
+
+   8.6124e-05
+
+
+perr_end =
+
+    0.0059
+
+Trans Jac
+_________
+Rerr_start =
+
+   2.1796e-05
+
+
+perr_start =
+
+   3.1608e-04
+
+
+Rerr_end =
+
+    0.0138
+
+
+perr_end =
+
+    0.0071
